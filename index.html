@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacherize 간편 매뉴얼 / Teacherize Simple Manual</title>
+    <title>Teacherize 가이드 / Teacherize Guide</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -24,13 +24,10 @@
             margin-bottom: 20px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 20px auto;
-            border: 1px solid #ddd;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        .highlight {
+            background-color: #ffffd9;
+            padding: 5px;
+            border-radius: 3px;
         }
         .tip {
             background-color: #e8f4f8;
@@ -44,20 +41,27 @@
             padding: 2px 4px;
             border-radius: 4px;
         }
-        #language-selector {
-            text-align: right;
-            margin-bottom: 20px;
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        .language-btn {
-            padding: 5px 10px;
-            margin-left: 10px;
+        #language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
             background-color: #3498db;
             color: white;
             border: none;
-            border-radius: 3px;
+            padding: 10px 15px;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
         }
-        .language-btn:hover {
+        #language-toggle:hover {
             background-color: #2980b9;
         }
         .content {
@@ -69,168 +73,117 @@
     </style>
 </head>
 <body>
-    <div id="language-selector">
-        <button class="language-btn" onclick="changeLanguage('ko')">한국어</button>
-        <button class="language-btn" onclick="changeLanguage('en')">English</button>
-    </div>
+    <button id="language-toggle" onclick="toggleLanguage()">English</button>
 
     <div id="ko-content" class="content active">
-        <h1>🎓 Teacherize 간편 매뉴얼</h1>
+        <h1>🎓 Teacherize 가이드</h1>
         
-        <p>안녕하세요, 선생님! Teacherize는 여러분의 수업 준비를 도와주는 특별한 도구예요. 이 간편 매뉴얼과 함께 Teacherize의 사용법을 쉽게 배워볼까요?</p>
+        <p>Teacherize로 수업 준비를 더 쉽고 빠르게 해보세요!</p>
 
         <div class="section">
             <h2>1. Teacherize 시작하기</h2>
-            <h3>Step 1: Teacherize 설치하기</h3>
             <ol>
-                <li>구글 스프레드시트를 엽니다.</li>
-                <li>상단 메뉴에서 '확장 프로그램' → '추가 기능 가져오기'를 클릭해요.</li>
-                <li>검색창에 'Teacherize'를 입력하고 설치 버튼을 눌러주세요.</li>
-            </ol>
-
-            <h3>Step 2: Teacherize 설정하기</h3>
-            <ol>
-                <li>스프레드시트 상단 메뉴에서 '확장 프로그램' → 'Teacherize' → 'Set Properties'를 클릭해요.</li>
-                <li>오른쪽에 나타나는 창에서 API 키를 입력해주세요. (API 키는 선생님의 학교에서 제공해줄 거예요!)</li>
-                <li>사용할 AI 모델을 선택하고, 다른 설정들도 원하는 대로 조절해보세요.</li>
-                <li>설정이 끝나면 'Save Settings' 버튼을 눌러주세요.</li>
+                <li>구글 스프레드시트 열기</li>
+                <li>'확장 프로그램' → '추가 기능 가져오기' → 'Teacherize' 검색 및 설치</li>
+                <li>'확장 프로그램' → 'Teacherize' → 'Set Properties'에서 API 키 입력 및 설정</li>
             </ol>
         </div>
 
         <div class="section">
             <h2>2. Teacherize 사용하기</h2>
-            <h3>Step 3: 예시 만들기</h3>
             <ol>
-                <li>스프레드시트에 다음과 같이 예시를 입력해봐요:
+                <li>스프레드시트에 예시 데이터 입력:
                     <ul>
-                        <li>A5에는 '날짜', B5에는 '행사명', C5에는 '활동내용'이라고 머리글을 작성해요.</li>
-                        <li>A6, B6, C6에 각각 예시 문장을 작성해주세요.</li>
+                        <li>A5, B5, C5에 머리글 (예: 날짜, 행사명, 활동내용)</li>
+                        <li>A6, B6, C6에 예시 데이터</li>
                     </ul>
                 </li>
-                <li>이렇게 예시를 만들어주면, Teacherize가 이를 바탕으로 학습해요.</li>
+                <li>새 데이터 입력: A7, B7에 새로운 정보 입력</li>
+                <li>C7 셀에 Teacherize 함수 사용:
+                    <p class="highlight"><code>=teacherize($A$6:$B$6,$C$6,A7:B7)</code></p>
+                </li>
+                <li>Enter 키를 눌러 결과 확인</li>
             </ol>
             <img src="teacherize.png" alt="Teacherize 사용 예시 화면">
-
-            <h3>Step 4: Teacherize 함수 사용하기</h3>
-            <ol>
-                <li>A7, B7에 새로운 내용을 입력해주세요.</li>
-                <li>C7 셀을 선택하고, 함수 입력창에 다음과 같이 입력해보세요:</li>
-            </ol>
-            <p><code>=teacherize($A$6:$B$6,$C$6,A7:B7)</code></p>
-            <p>여기서 $A$6:$B$6는 예시 질문들, $C$6는 예시 답변, A7:B7은 새로운 질문이에요.</p>
-
-            <h3>Step 5: 결과 확인하기</h3>
-            <ol>
-                <li>Enter 키를 누르면, Teacherize가 마법처럼 새로운 답변을 C7 셀에 만들어줄 거예요!</li>
-                <li>이 답변을 바탕으로 수업 자료를 만들어보세요.</li>
-            </ol>
         </div>
 
         <div class="section">
-            <h2>3. 꿀팁과 주의사항</h2>
+            <h2>3. 유용한 팁</h2>
             <div class="tip">
-                <h3>💡 꿀팁</h3>
                 <ul>
-                    <li>다양한 예시를 많이 입력할수록 더 좋은 결과를 얻을 수 있어요.</li>
-                    <li>'Apply to Selected Cells' 버튼을 사용하면 여러 셀에 한 번에 Teacherize를 적용할 수 있어요.</li>
-                    <li>'Paste Values to All' 버튼으로 모든 Teacherize 함수의 결과를 고정된 값으로 바꿀 수 있어요.</li>
-                </ul>
-            </div>
-
-            <div class="tip">
-                <h3>⚠️ 주의사항</h3>
-                <ul>
-                    <li>API 키는 비밀번호처럼 소중히 다뤄주세요. 다른 사람에게 알려주면 안 돼요!</li>
-                    <li>Teacherize가 만든 내용은 항상 선생님이 검토해주세요. 가끔은 이상한 답변을 할 수도 있거든요.</li>
-                    <li>학생들의 개인정보가 포함된 내용은 입력하지 말아주세요.</li>
+                    <li>다양한 예시를 입력할수록 더 좋은 결과를 얻을 수 있어요.</li>
+                    <li>'Apply to Selected Cells' 버튼으로 여러 셀에 한 번에 적용 가능</li>
+                    <li>'Paste Values to All'로 함수 결과를 고정값으로 변경 가능</li>
                 </ul>
             </div>
         </div>
 
-        <p>이제 Teacherize를 사용할 준비가 됐어요! 어려운 점이 있다면 언제든 도움을 요청해주세요. 즐거운 수업 준비 되세요! 🚀📚</p>
+        <p>Teacherize로 창의적이고 효율적인 수업 준비하세요! 🚀📚</p>
     </div>
 
     <div id="en-content" class="content">
-        <h1>🎓 Teacherize Simple Manual</h1>
+        <h1>🎓 Teacherize Guide</h1>
         
-        <p>Hello, teachers! Teacherize is a special tool to help you prepare for your classes. Let's learn how to use Teacherize easily with this simple manual!</p>
+        <p>Make your lesson preparation easier and faster with Teacherize!</p>
 
         <div class="section">
             <h2>1. Getting Started with Teacherize</h2>
-            <h3>Step 1: Installing Teacherize</h3>
             <ol>
-                <li>Open Google Spreadsheets.</li>
-                <li>Click on 'Extensions' → 'Get add-ons' in the top menu.</li>
-                <li>Type 'Teacherize' in the search bar and click the install button.</li>
-            </ol>
-
-            <h3>Step 2: Setting up Teacherize</h3>
-            <ol>
-                <li>In the spreadsheet's top menu, click 'Extensions' → 'Teacherize' → 'Set Properties'.</li>
-                <li>Enter your API key in the window that appears on the right. (Your school should provide you with the API key!)</li>
-                <li>Select the AI model you want to use and adjust other settings as desired.</li>
-                <li>When you're done, click the 'Save Settings' button.</li>
+                <li>Open Google Spreadsheets</li>
+                <li>'Extensions' → 'Get add-ons' → Search and install 'Teacherize'</li>
+                <li>'Extensions' → 'Teacherize' → 'Set Properties' to enter API key and settings</li>
             </ol>
         </div>
 
         <div class="section">
             <h2>2. Using Teacherize</h2>
-            <h3>Step 3: Creating Examples</h3>
             <ol>
-                <li>Enter examples in the spreadsheet like this:
+                <li>Enter example data in the spreadsheet:
                     <ul>
-                        <li>Write 'Date' in A5, 'Event Name' in B5, and 'Activity Details' in C5 as headers.</li>
-                        <li>Write example sentences in A6, B6, and C6 respectively.</li>
+                        <li>A5, B5, C5 for headers (e.g., Date, Event Name, Activity Details)</li>
+                        <li>A6, B6, C6 for example data</li>
                     </ul>
                 </li>
-                <li>By creating these examples, Teacherize will learn from them.</li>
+                <li>Enter new data: Input new information in A7, B7</li>
+                <li>Use Teacherize function in C7:
+                    <p class="highlight"><code>=teacherize($A$6:$B$6,$C$6,A7:B7)</code></p>
+                </li>
+                <li>Press Enter to see the result</li>
             </ol>
             <img src="teacherize.png" alt="Teacherize usage example screen">
-
-            <h3>Step 4: Using the Teacherize Function</h3>
-            <ol>
-                <li>Enter new content in A7 and B7.</li>
-                <li>Select cell C7 and enter the following in the function input bar:</li>
-            </ol>
-            <p><code>=teacherize($A$6:$B$6,$C$6,A7:B7)</code></p>
-            <p>Here, $A$6:$B$6 are the example questions, $C$6 is the example answer, and A7:B7 are the new questions.</p>
-
-            <h3>Step 5: Checking the Results</h3>
-            <ol>
-                <li>Press Enter, and Teacherize will magically create a new answer in cell C7!</li>
-                <li>Use this answer to create your teaching materials.</li>
-            </ol>
         </div>
 
         <div class="section">
-            <h2>3. Tips and Precautions</h2>
+            <h2>3. Useful Tips</h2>
             <div class="tip">
-                <h3>💡 Tips</h3>
                 <ul>
-                    <li>The more diverse examples you input, the better results you can get.</li>
-                    <li>Use the 'Apply to Selected Cells' button to apply Teacherize to multiple cells at once.</li>
-                    <li>The 'Paste Values to All' button can change all Teacherize function results to fixed values.</li>
-                </ul>
-            </div>
-
-            <div class="tip">
-                <h3>⚠️ Precautions</h3>
-                <ul>
-                    <li>Treat your API key like a password. Don't share it with others!</li>
-                    <li>Always review the content created by Teacherize. It might occasionally give strange answers.</li>
-                    <li>Do not input any content that includes students' personal information.</li>
+                    <li>More diverse examples lead to better results.</li>
+                    <li>Use 'Apply to Selected Cells' to apply to multiple cells at once</li>
+                    <li>'Paste Values to All' changes function results to fixed values</li>
                 </ul>
             </div>
         </div>
 
-        <p>Now you're ready to use Teacherize! If you have any difficulties, feel free to ask for help. Happy lesson planning! 🚀📚</p>
+        <p>Prepare creative and efficient lessons with Teacherize! 🚀📚</p>
     </div>
 
     <script>
-        function changeLanguage(lang) {
-            document.getElementById('ko-content').classList.remove('active');
-            document.getElementById('en-content').classList.remove('active');
-            document.getElementById(lang + '-content').classList.add('active');
+        function toggleLanguage() {
+            var koContent = document.getElementById('ko-content');
+            var enContent = document.getElementById('en-content');
+            var toggleButton = document.getElementById('language-toggle');
+
+            if (koContent.classList.contains('active')) {
+                koContent.classList.remove('active');
+                enContent.classList.add('active');
+                toggleButton.innerText = '한국어';
+                document.documentElement.lang = 'en';
+            } else {
+                enContent.classList.remove('active');
+                koContent.classList.add('active');
+                toggleButton.innerText = 'English';
+                document.documentElement.lang = 'ko';
+            }
         }
     </script>
 </body>
